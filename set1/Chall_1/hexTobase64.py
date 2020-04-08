@@ -19,7 +19,7 @@ def hexStringToAscii(ip):
     return string
 
 def main():
-    #ip = input("Give your input: ")
+    ip = input("Give your input: ")
     #print(hexStringToAscii(asciiToHexString(ip)))
 
 
