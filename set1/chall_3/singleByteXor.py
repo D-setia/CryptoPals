@@ -90,7 +90,7 @@ def checkAndAdd(validPts, scoreNew, ptNew):
 def identifySingleByteXor(ct):
     ciphertext = hexToBytes(ct)
     validPts = []
-    print(len(validPts))
+    
     for i in range(256):
         pt = xorStringWithByte(ciphertext, i)
         if(isValidPlaintext(pt)):
