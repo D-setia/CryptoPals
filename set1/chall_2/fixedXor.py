@@ -1,5 +1,3 @@
-import sys
-
 def fixedXor(ip1, ip2):
     if(len(ip1) != len(ip2)):
         print("Error: length of inputs not same")
