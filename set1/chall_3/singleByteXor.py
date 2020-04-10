@@ -44,15 +44,6 @@ def scorePlaintext(pt):
 
     return chi
 
-
-def noOfSpaces(byteArray):
-    noOfSpaces = 0
-    for i in range(len(byteArray)):
-        if byteArray[i] == 32:
-            noOfSpaces +=1
-
-    return noOfSpaces
-
 def checkAndAdd(validPts, scoreNew, ptNew):
     validPtsNew = []
     if len(validPts) == 0:
@@ -62,13 +53,6 @@ def checkAndAdd(validPts, scoreNew, ptNew):
         if(validPts[0][0] < scoreNew):
             validPts.append((scoreNew, ptNew))
             validPtsNew = validPts
-        #elif validPts[0][0] == scoreNew:
-        #    if noOfSpaces(validPts[0][1]) > noOfSpaces(ptNew):
-        #        validPts.append((scoreNew, ptNew))
-        #        validPtsNew = validPts
-        #    else:
-        #        validPtsNew.append((scoreNew, ptNew))
-        #        validPtsNew.append(validPts[0])
         else:
             validPtsNew.append((scoreNew, ptNew))
             validPtsNew.append(validPts[0])
@@ -77,23 +61,10 @@ def checkAndAdd(validPts, scoreNew, ptNew):
             validPtsNew.append((scoreNew, ptNew))
             validPtsNew.append(validPts[0])
             validPtsNew.append(validPts[1])
-        #elif validPts[0][0] == scoreNew:
-        #    if noOfSpaces(validPts[0][1]) < noOfSpaces(ptNew):
-        #        validPtsNew.append((scoreNew, ptNew))
-        #        validPtsNew.append(validPts[0])
-        #        validPtsNew.append(validPts[1])
         elif validPts[1][0] > scoreNew:
             validPtsNew.append(validPts[0])
             validPtsNew.append((scoreNew, ptNew))
             validPtsNew.append(validPts[1])
-        #elif validPts[1][0] == scoreNew:
-        #    if noOfSpaces(validPts[1][1]) < noOfSpaces(ptNew): 
-        #        validPtsNew.append(validPts[0])
-        #        validPtsNew.append((scoreNew, ptNew))
-        #        validPtsNew.append(validPts[1])
-        #    else:
-        #        validPts.append((scoreNew,ptNew))
-        #        validPtsNew = validPts
         else:
             validPts.append((scoreNew, ptNew))
             validPtsNew = validPts
@@ -102,31 +73,14 @@ def checkAndAdd(validPts, scoreNew, ptNew):
             validPtsNew.append((scoreNew, ptNew))
             validPtsNew.append(validPts[0])
             validPtsNew.append(validPts[1])
-        #elif validPts[0][0] == scoreNew:
-        #    if noOfSpaces(validPts[0][1]) < noOfSpaces(ptNew):
-        #        validPtsNew.append((scoreNew, ptNew))
-        #        validPtsNew.append(validPts[0])
-        #        validPtsNew.append(validPts[1])
         elif validPts[1][0] > scoreNew:
             validPtsNew.append(validPts[0])
             validPtsNew.append((scoreNew, ptNew))
             validPtsNew.append(validPts[1])
-        #elif validPts[1][0] == scoreNew:
-        #    if noOfSpaces(validPts[1][1]) < noOfSpaces(ptNew):
-        #        validPtsNew.append(validPts[0])
-        #        validPtsNew.append((scoreNew, ptNew))
-        #        validPtsNew.append(validPts[1])
         elif validPts[2][0] > scoreNew:
             validPtsNew.append(validPts[0])
             validPtsNew.append(validPts[1])
             validPtsNew.append((scoreNew, ptNew))
-        #elif validPts[2][0] == scoreNew:
-        #    if noOfSpaces(validPts[2][1]) < noOfSpaces(ptNew):
-        #        validPtsNew.append(validPts[0])
-        #        validPtsNew.append(validPts[1])
-        #        validPtsNew.append((scoreNew, ptNew))
-        #    else:
-        #        validPtsNew = validPts
         else:
             validPtsNew = validPts
 
