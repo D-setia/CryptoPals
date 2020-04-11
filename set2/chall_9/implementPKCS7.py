@@ -1,6 +1,6 @@
 
 def PKCS7(ipByteArr, blockSize):
-    noToAppend = blockSize - len(ipByteArr)
+    noToAppend = blockSize - len(ipByteArr)%blockSize
     paddedResult = []
     for i in range(len(ipByteArr)+noToAppend):
         if i < len(ipByteArr):

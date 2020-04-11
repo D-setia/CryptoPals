@@ -64,10 +64,12 @@ def main():
     contents = base64.b64decode(contents)
     IV = '\x00'*16
     IV = bytes(IV.encode('utf-8'))
-    ct = AES_CBCdecrypt(contents[:len(contents)-1], key, IV)
+    ct = AES_CBCdecrypt(contents, key, IV)
     if ct != None:
         ct = ct.decode('utf-8')
         print(ct)
+        #pt = AES_CBCencrypt(ct.encode('utf-8'), key, IV)
+        #print(pt)
     #print(contents)
 
 
