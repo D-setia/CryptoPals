@@ -39,8 +39,9 @@ def blackBox(ptByteArray):
         #print('Original: ECB')
         return ct
     else:
+        ptInput = PKCS7.PKCS7(randPaddedPt, 16)
         IV = getRandBytes(16)
-        ct = AES_CBC.AES_CBCencrypt(randPaddedPt, key, IV)
+        ct = AES_CBC.AES_CBCencrypt(ptInput, key, IV)
         #print('Original: CBC')
         return ct
 

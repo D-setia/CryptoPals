@@ -6,11 +6,10 @@ import set1.chall_7.aesInEcbMode as AES_ECB
 import set2.chall_9.implementPKCS7 as PKCS7
 
 def AES_CBCencrypt(ptByteArray, key, IV):
-    paddedPt = PKCS7.PKCS7(ptByteArray, 16)
     prevCt = IV
     ct = [] 
-    for i in range(len(paddedPt)//16):
-        ptInput = xorEnc.fixedXor(paddedPt[i*16:(i+1)*16], prevCt)
+    for i in range(len(ptByteArray)//16):
+        ptInput = xorEnc.fixedXor(ptByteArray[i*16:(i+1)*16], prevCt)
         newCtBlock = AES_ECB.AESencrypt(ptInput, key)
         for j in range(len(newCtBlock)):
             ct.append(newCtBlock[j])
@@ -18,6 +17,7 @@ def AES_CBCencrypt(ptByteArray, key, IV):
     
     ct = bytes(ct)
     return ct
+
 
 def AES_CBCdecrypt(ctByteArray, key, IV):
     pt = []
@@ -37,19 +37,8 @@ def AES_CBCdecrypt(ctByteArray, key, IV):
 
     pt = pt[::-1]
     
-    pad = pt[len(pt)-1]
-    isValidPad = True
-    for i in range(pad):
-        if pt[len(pt) -1 -i] != pad:
-            isValidPad = False
-
-    if isValidPad:
-        pt = pt[:len(pt)-pad]
-        pt = bytes(pt)
-        return pt
-    else:
-        print("Invalid Pad")
-        return None
+    pt = bytes(pt)
+    return pt
 
 
 def main():
