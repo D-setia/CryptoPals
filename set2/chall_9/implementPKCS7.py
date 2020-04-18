@@ -12,13 +12,16 @@ def PKCS7(ipByteArr, blockSize):
     return paddedResult
 
 
-def PKCS7validate(paddedPtBytes):
+def PKCS7validate(paddedPtBytes, blockSize):
     isValid = True
     pad = paddedPtBytes[len(paddedPtBytes)-1]
-    for i in range(pad):
-        if paddedPtBytes[len(paddedPtBytes)-1-i] != pad:
-            isValid = False
-    return isValid
+    if pad > blockSize or pad == 0:
+        isValid = False
+    else:
+        for i in range(pad):
+            if paddedPtBytes[len(paddedPtBytes)-1-i] != pad:
+                isValid = False
+        return isValid
 
 def main():
     ip = "YELLOW SUBMARINE"

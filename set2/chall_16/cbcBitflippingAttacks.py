@@ -60,7 +60,7 @@ def checkForAdminTuple(ptString):
 
 def decryptAndCheckForAdmin(ctBytes):
     pt = AES_CBC.AES_CBCdecrypt(ctBytes, GLOBAL_KEY, IV)
-    isValidPadding = PKCS7.PKCS7validate(pt)
+    isValidPadding = PKCS7.PKCS7validate(pt, 16)
     if isValidPadding:
         pad = pt[len(pt)-1]
         pt = pt[:len(pt)-pad]
