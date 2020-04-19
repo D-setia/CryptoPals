@@ -7,11 +7,10 @@ import set1.chall_3.singleByteXor as SingleByteXor
 import set3.chall_18.implementCtrMode as AES_CTR
 
 
-def generateCts():
+def generateCts(ipFile):
     key = helper.getRandBytes(16)
     nonce = 0
     cts = []
-    ipFile = open("input.txt", 'r')
     for line in ipFile:
         pt = line[:len(line)-1]
         pt = base64.b64decode(pt)
@@ -68,7 +67,9 @@ def breakEnc2(cts):
 
 
 def main():
-    cts = generateCts()
+    ipFile = open("input.txt", 'r')
+    cts = generateCts(ipFile)
+    ipFile.close()
     pts = breakEnc2(cts)
     for x in pts:
         print(x)

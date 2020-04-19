@@ -15,7 +15,7 @@ def isValidPlaintext(ip):
         if (ip[i] in range(65, 91)) or (ip[i] in range(97,123)):
             chars += 1
     
-    if chars/len(ip) > 0.6:
+    if chars/len(ip) > 0.48:
         return True
     else:
         return False
