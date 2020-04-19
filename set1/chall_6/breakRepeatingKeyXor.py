@@ -1,7 +1,7 @@
 import base64
 import sys
-sys.path.insert(1, "../")
-import chall_3.singleByteXor as singleByteXor
+sys.path.insert(1, "../..")
+import set1.chall_3.singleByteXor as singleByteXor
 
 def stringToBitString(string):
     bitString = ''.join(format(ord(x), 'b').zfill(8) for x in string)
@@ -33,7 +33,7 @@ def determineKeySize(byteArr):
         for j in range(4):
             for k in range(j):
                 #getHammingDistance('hello', 'abcde')
-                avgHammingDist += getHammingDistance(blocks[j].decode('utf-8'), blocks[k].decode('utf-8'))
+                avgHammingDist += getHammingDistance(blocks[j].decode('latin1'), blocks[k].decode('latin1'))
 
         avgHammingDist /= 6
         normalisedAvgHammingDist = avgHammingDist/i
