@@ -9,14 +9,6 @@ a = 0x9908B0DF
 l = 18
 f = 1812433253
 
-#w, n, m, r = 64, 312, 156, 31
-#a = 0xb5026f5aa96619e9
-#(u, d) = (29, 0x5555555555555555)
-#(s, b) = (17, 0x71d67fffeda60000)
-#(t, c) = (37, 0xfff7eee000000000)
-#f = 6364136223846793005
-#l = 43
-
 MT = [None for i in range(n)]
 index = n+1
 lower_mask = pow(2,r) -1
@@ -60,9 +52,9 @@ def extract_number():
         twist()
 
     y = MT[index]
-    y = y ^ ((y>>u) and d)
-    y = y ^ ((y<<s) and b)
-    y = y ^ ((y<<t) and c)
+    y = y ^ ((y>>u) & d)
+    y = y ^ ((y<<s) & b)
+    y = y ^ ((y<<t) & c)
     y = y ^ (y>>l)
 
     index += 1
