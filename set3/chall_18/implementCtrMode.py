@@ -32,15 +32,22 @@ def AES_CTR(ipBytes, key, nonce):
     for i in range(noOfBlocks):
         ctr = get64BitLittleEndianBytes(i)
         ipToAes = nonce+ctr
-        encryptedCtr = AES_ECB.AESencrypt(ipToAes, key)    
+        encryptedCtr = AES_ECB.AESencrypt(ipToAes, key) 
         if i == noOfBlocks-1:
-            op = ENC.fixedXor(encryptedCtr[:len(ipBytes)%blockSize], ipBytes[i*blockSize: i*blockSize + len(ipBytes)%blockSize])
+            ipBytesForXor = ipBytes[i*blockSize:]
+            op = ENC.fixedXor(encryptedCtr[:len(ipBytesForXor)], ipBytesForXor )
             opBytes += op
         else:
             op = ENC.fixedXor(encryptedCtr, ipBytes[i*blockSize: (i+1)*blockSize])
             opBytes += op
-
     return opBytes
+
+
+def AES_CTR_edit(ctBytes, key, nonce, offset, newText):
+    originalPt = AES_CTR(ctBytes, key, nonce)
+    modifiedPt = originalPt[:offset] + newText
+    modifiedCt = AES_CTR(modifiedPt, key, nonce)
+    return modifiedCt
 
 
 def main():
@@ -50,6 +57,8 @@ def main():
     ip = "L77na/nrFsKvynd6HzOoG7GHTLXsTVu9qvY/2syLXzhPweyyMTJULu/6/kXX0KSvoOLSFQ=="
     ip = base64.b64decode(ip)
     decrypted = AES_CTR(ip, key, nonce)
+    encrypted = AES_CTR(decrypted, key, nonce)
+    print(encrypted == ip)
     print(decrypted)
 
 if __name__ == "__main__":
