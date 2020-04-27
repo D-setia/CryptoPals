@@ -62,11 +62,22 @@ def binaryStringOr(binStr1, binStr2):
         return orString
 
 
+def leftRotate(n, d):
+    return ((n << d)|(n >> (32-d))) & 0xffffffff
+
+
+def rightRotate(n, d):
+    return ((n >> d)|(n << (32-d))) & 0xffffffff
+
+
+
 def main():
     andString = binaryStringXor('01001100', '00101010')
     print(andString)
     randBytes = getRandBytes(16)
     print(randBytes)
+    print(pow(2,32)-1)
+    print(leftRotate(pow(2,32)-1, 30))
 
 
 if __name__ == "__main__":
