@@ -70,6 +70,10 @@ def rightRotate(n, d):
     return ((n >> d)|(n << (32-d))) & 0xffffffff
 
 
+def changeEndianness(a):
+    res = ((a & 0xff) << 24) | ((a & 0xff00) << 8) | ((a & 0xff0000) >> 8) |((a & 0xff000000) >> 24)
+    return res
+
 
 def main():
     andString = binaryStringXor('01001100', '00101010')
