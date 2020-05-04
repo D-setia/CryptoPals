@@ -5,25 +5,29 @@ p = int(p, 16)
 
 g = 2
 
-def generateKeyPair():
+def generateKeyPair(p_1 = None, g_1 = None):
     global p, g
-    privKey = random.randrange(0, p+1)
-    pubKey = pow(g, privKey, p)
+    p_used = p if p_1 == None else p_1
+    g_used = g if g_1 == None else g_1
+    privKey = random.randrange(0, p_used+1)
+    pubKey = pow(g_used, privKey, p_used)
     return privKey, pubKey
 
-def DH(pubKeyB, myKey = None):
+def DH(pubKeyB, myKeyPair, p_1 = None):
     global p
-    if myKey == None:
-        (privKeyA, pubKeyA) = generateKeyPair()
-    else:
-        (privKeyA, pubKeyA) = myKey
-    secretKey = pow(pubKeyB, privKeyA, p)
-    return pubKeyA, secretKey
+    p_used = p if p_1 == None else p_1
+    (privKeyA, pubKeyA) = myKeyPair
+    secretKey = pow(pubKeyB, privKeyA, p_used)
+    return secretKey
 
 def main():
     privKeyB, pubKeyB = generateKeyPair()
-    pubKeyA, secretKeyA = DH(pubKeyB)
-    temp, secretKeyB = DH(pubKeyA, (privKeyB, pubKeyB))
+    keyPairB = (privKeyB, pubKeyB)
+    privKeyA, pubKeyA = generateKeyPair()
+    keyPairA = (privKeyA, pubKeyA)
+
+    secretKeyA = DH(pubKeyB, keyPairA)
+    secretKeyB = DH(pubKeyA, keyPairB)
     print(secretKeyA == secretKeyB)
     
 

@@ -23,6 +23,15 @@ def PKCS7validate(paddedPtBytes, blockSize):
                 isValid = False
         return isValid
 
+
+def PKCS7unpad(ptBytes):
+    pad = ptBytes[len(ptBytes)-1]
+    if pad > len(ptBytes):
+        raise Exception('Something is wrong')
+    else:
+        return ptBytes[:len(ptBytes)-pad]
+
+
 def main():
     ip = "YELLOW SUBMARINE"
     blocksize = 16
