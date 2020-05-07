@@ -25,8 +25,7 @@ def initComm(email, password):
     keyPairA = DiffieHellman.generateKeyPair()
     a = keyPairA[0]
     A = keyPairA[1]
-    print('Email:', email)
-    print('A:', A)
+    print('\nA:', A)
     print('')
     salt = input('Salt: ')
     salt = int(salt)
@@ -64,7 +63,9 @@ def initComm(email, password):
 
 
 def main():
-    initComm('abc', 'password1')
+    email = input("Email: ")
+    password = input("Password: ")
+    initComm(email, password)
 
 
 if __name__ == "__main__":
