@@ -1,30 +1,19 @@
-import base64
 from Crypto.Util import number
 import sys
 sys.path.insert(1, "../../")
 import helperFunctions as helpers
 
-def stringToInt(string, doB64encode):
-    if doB64encode:
-        byteStr = string.encode('latin1')
-        b64ByteStr = base64.b64encode(byteStr)
-        strHex = b64ByteStr.hex()
-    else:
-        strHex = string.encode('latin1').hex()
+def stringToInt(string):
+    strHex = string.encode('latin1').hex()
     Int = int(strHex, 16)
     return Int
 
-def intToStr(integer, doB64Decode):
+def intToStr(integer):
     hexStr = hex(integer)[2:]
     if len(hexStr)%2 == 1:
         hexStr = '0' + hexStr
     byteStr = bytes.fromhex(hexStr)
-    if doB64Decode:
-        b64str = byteStr.decode('latin1')
-        string = base64.b64decode(b64str)
-        string = string.decode('latin1')
-    else:
-        string = byteStr.decode('latin1')
+    string = byteStr.decode('latin1')
     return string
 
 
@@ -55,16 +44,16 @@ def decryptInt(ct, privateKey):
     return pt
 
 def encrypt(ptString, publicKey):
-    m = stringToInt(ptString, True)
+    m = stringToInt(ptString)
     ctInt = encryptInt(m, publicKey)
-    ctStr = intToStr(ctInt, False)
+    ctStr = intToStr(ctInt)
     return ctStr
 
 
 def decrypt(ctString, privateKey):
-    ctInt = stringToInt(ctString, False)
+    ctInt = stringToInt(ctString)
     ptInt = decryptInt(ctInt, privateKey)
-    ptStr = intToStr(ptInt, True)
+    ptStr = intToStr(ptInt)
     return ptStr
 
 def main():

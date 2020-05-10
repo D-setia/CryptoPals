@@ -135,6 +135,21 @@ def modInv(x, N):
 
         return inv
 
+def invPow(x, n):
+    high = 1
+    while pow(high, n) < x:
+        high *= 2
+    low = high//2
+    while low < high:
+        mid = (low + high)//2
+        if low < mid and pow(mid, n) < x:
+            low = mid
+        elif high > mid and pow(mid, n) > x:
+            high = mid
+        else:
+            return mid
+    return mid + 1
+
 
 def main():
     andString = binaryStringXor('01001100', '00101010')
